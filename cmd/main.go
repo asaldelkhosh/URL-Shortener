@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"github.com/amirhnajafiz/Blue-sky/internal/cmd"
+)
 
 func main() {
-	fmt.Println("blue sky")
+	cmd.Exec()
 }

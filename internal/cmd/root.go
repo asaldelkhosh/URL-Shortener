@@ -15,4 +15,10 @@ func Exec() {
 	}
 
 	fmt.Println(peerConnectionConfig.Certificates)
+
+	m := webrtc.MediaEngine{}
+	m.RegisterCodec(webrtc.NewRTPVP8Codec(webrtc.DefaultPayloadTypeVP8, 90000))
+	api := webrtc.NewAPI(webrtc.WithMediaEngine(m))
+
+	fmt.Println(api)
 }

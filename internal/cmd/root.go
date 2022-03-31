@@ -28,3 +28,16 @@ func Exec() {
 		panic(err)
 	}
 }
+
+func recieveTrack(
+	bobPeerConnection *webrtc.PeerConnection,
+	peerConnectionMap map[string]chan *webrtc.Track,
+	AliceID string) {
+
+	if _, ok := peerConnectionMap[AliceID]; !ok {
+		peerConnectionMap[AliceID] = make(chan *webrtc.Track, 1)
+	}
+
+	localTrack := <-peerConnectionMap[AliceID]
+	_, _ = bobPeerConnection.AddTrack(localTrack)
+}

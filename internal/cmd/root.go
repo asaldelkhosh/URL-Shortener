@@ -1,9 +1,12 @@
 package cmd
 
 import (
-	"github.com/pion/webrtc/v2"
+	"fmt"
+	"strconv"
 
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/media"
+	"github.com/gin-gonic/gin"
+	"github.com/pion/webrtc/v2"
 )
 
 type Sdp struct {
@@ -27,6 +30,17 @@ func Exec() {
 	if err != nil {
 		panic(err)
 	}
+
+	router := gin.Default()
+	router.POST("/webrtc/sdp/m/:meetingId/c/:userID/p/:peerId/s/:isSender", func(c *gin.Context) {
+		isSender, _ := strconv.ParseBool(c.Param("isSender"))
+		userID := c.Param("userID")
+		peerID := c.Param("peerId")
+
+		fmt.Println(isSender, userID, peerID)
+	})
+
+	_ = router.Run(":8080")
 }
 
 func recieveTrack(

@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"net/http"
 	"strconv"
 	"time"
 
@@ -19,12 +20,26 @@ type Sdp struct {
 }
 
 func Exec() {
-	// sender to channel of track
+	router := gin.Default()
+
 	peerConnectionMap := make(map[string]chan *webrtc.Track)
 	api := media.GetMediaAPI()
 	peerConnectionConfig := media.GetPeerConfig()
 
-	var session Sdp
+	router.POST("/webrtc/sdp/m/:meetingId/c/:userID/p/:peerId/s/:isSender", func(c *gin.Context) {
+		isSender, _ := strconv.ParseBool(c.Param("isSender"))
+		userID := c.Param("userID")
+		peerID := c.Param("peerId")
+
+		var session Sdp
+		if err := c.ShouldBindJSON(&session); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		fmt.Println(isSender, userID, peerID)
+	})
+
 	offer := webrtc.SessionDescription{}
 
 	peerConnection, _ := api.NewPeerConnection(peerConnectionConfig)
@@ -37,15 +52,6 @@ func Exec() {
 	if err != nil {
 		panic(err)
 	}
-
-	router := gin.Default()
-	router.POST("/webrtc/sdp/m/:meetingId/c/:userID/p/:peerId/s/:isSender", func(c *gin.Context) {
-		isSender, _ := strconv.ParseBool(c.Param("isSender"))
-		userID := c.Param("userID")
-		peerID := c.Param("peerId")
-
-		fmt.Println(isSender, userID, peerID)
-	})
 
 	_ = router.Run(":8080")
 }

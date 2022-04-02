@@ -36,7 +36,7 @@ func Exec() {
 		}
 
 		offer := webrtc.SessionDescription{}
-		signal.Decode(session.Sdp, &offer)
+		signal.Decode(cfg.Signal.Compress, session.Sdp, &offer)
 
 		peerConnection, _ := api.NewPeerConnection(peerConnectionConfig)
 		_ = peerConnection.SetRemoteDescription(offer)

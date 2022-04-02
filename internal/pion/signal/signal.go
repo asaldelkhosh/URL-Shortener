@@ -13,9 +13,6 @@ import (
 	"strings"
 )
 
-// Allows compressing offer/answer to bypass terminal input limits.
-const compress = false
-
 func MustReadStdin() string {
 	r := bufio.NewReader(os.Stdin)
 
@@ -39,7 +36,7 @@ func MustReadStdin() string {
 	return in
 }
 
-func Encode(obj interface{}) string {
+func Encode(compress bool, obj interface{}) string {
 	b, err := json.Marshal(obj)
 	if err != nil {
 		panic(err)
@@ -52,7 +49,7 @@ func Encode(obj interface{}) string {
 	return base64.StdEncoding.EncodeToString(b)
 }
 
-func Decode(in string, obj interface{}) {
+func Decode(compress bool, in string, obj interface{}) {
 	b, err := base64.StdEncoding.DecodeString(in)
 	if err != nil {
 		panic(err)

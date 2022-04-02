@@ -11,7 +11,8 @@ import (
 )
 
 type Config struct {
-	Signal signal.Config `koanf:"signal"`
+	Address string        `koanf:"address"`
+	Signal  signal.Config `koanf:"signal"`
 }
 
 func Load() Config {

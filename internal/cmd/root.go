@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/amirhnajafiz/Blue-sky/internal/config"
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/media"
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/track"
@@ -16,6 +17,7 @@ type Sdp struct {
 }
 
 func Exec() {
+	cfg := config.Load()
 	router := gin.Default()
 
 	peerConnectionMap := make(map[string]chan *webrtc.Track)
@@ -46,5 +48,5 @@ func Exec() {
 		}
 	})
 
-	_ = router.Run(":8080")
+	_ = router.Run(cfg.Address)
 }

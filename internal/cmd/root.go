@@ -41,6 +41,8 @@ func Exec() {
 
 		if !isSender {
 			track.ReceiveTrack(peerConnection, peerConnectionMap, peerID)
+		} else {
+			track.CreateTrack(peerConnection, peerConnectionMap, userID)
 		}
 	})
 

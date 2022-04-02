@@ -21,9 +21,8 @@ type Sdp struct {
 func Exec() {
 	// sender to channel of track
 	peerConnectionMap := make(map[string]chan *webrtc.Track)
-
-	peerConnectionConfig := media.GetPeerConfig()
 	api := media.GetMediaAPI()
+	peerConnectionConfig := media.GetPeerConfig()
 
 	var session Sdp
 	offer := webrtc.SessionDescription{}

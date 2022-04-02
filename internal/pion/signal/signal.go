@@ -2,6 +2,8 @@ package signal
 
 import (
 	"bufio"
+	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"io"
 	"os"
@@ -32,4 +34,33 @@ func MustReadStdin() string {
 	fmt.Println("")
 
 	return in
+}
+
+func Encode(obj interface{}) string {
+	b, err := json.Marshal(obj)
+	if err != nil {
+		panic(err)
+	}
+
+	if compress {
+		b = zip(b)
+	}
+
+	return base64.StdEncoding.EncodeToString(b)
+}
+
+func Decode(in string, obj interface{}) {
+	b, err := base64.StdEncoding.DecodeString(in)
+	if err != nil {
+		panic(err)
+	}
+
+	if compress {
+		b = unzip(b)
+	}
+
+	err = json.Unmarshal(b, obj)
+	if err != nil {
+		panic(err)
+	}
 }

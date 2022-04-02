@@ -15,19 +15,20 @@ const (
 )
 
 func ReceiveTrack(
-	bobPeerConnection *webrtc.PeerConnection,
+	peerConnection *webrtc.PeerConnection,
 	peerConnectionMap map[string]chan *webrtc.Track,
-	AliceID string) {
+	receiverID string) {
 
-	if _, ok := peerConnectionMap[AliceID]; !ok {
-		peerConnectionMap[AliceID] = make(chan *webrtc.Track, 1)
+	if _, ok := peerConnectionMap[receiverID]; !ok {
+		peerConnectionMap[receiverID] = make(chan *webrtc.Track, 1)
 	}
 
-	localTrack := <-peerConnectionMap[AliceID]
-	_, _ = bobPeerConnection.AddTrack(localTrack)
+	localTrack := <-peerConnectionMap[receiverID]
+	_, _ = peerConnection.AddTrack(localTrack)
 }
 
-func CreateTrack(peerConnection *webrtc.PeerConnection,
+func CreateTrack(
+	peerConnection *webrtc.PeerConnection,
 	peerConnectionMap map[string]chan *webrtc.Track,
 	currentUserID string) {
 

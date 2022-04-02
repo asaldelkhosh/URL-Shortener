@@ -3,17 +3,12 @@ package cmd
 import (
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/media"
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/track"
 	"github.com/gin-gonic/gin"
 	"github.com/pion/webrtc/v2"
-)
-
-const (
-	rtcpPLIInterval = time.Second * 3
 )
 
 type Sdp struct {

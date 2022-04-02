@@ -1,12 +1,13 @@
 package cmd
 
 import (
-	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
 	"net/http"
 	"strconv"
 	"time"
 
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/media"
+	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
+	"github.com/amirhnajafiz/Blue-sky/internal/pion/track"
 	"github.com/gin-gonic/gin"
 	"github.com/pion/webrtc/v2"
 )
@@ -44,22 +45,9 @@ func Exec() {
 		_ = peerConnection.SetRemoteDescription(offer)
 
 		if !isSender {
-			receiveTrack(peerConnection, peerConnectionMap, peerID)
+			track.ReceiveTrack(peerConnection, peerConnectionMap, peerID)
 		}
 	})
 
 	_ = router.Run(":8080")
-}
-
-func receiveTrack(
-	bobPeerConnection *webrtc.PeerConnection,
-	peerConnectionMap map[string]chan *webrtc.Track,
-	AliceID string) {
-
-	if _, ok := peerConnectionMap[AliceID]; !ok {
-		peerConnectionMap[AliceID] = make(chan *webrtc.Track, 1)
-	}
-
-	localTrack := <-peerConnectionMap[AliceID]
-	_, _ = bobPeerConnection.AddTrack(localTrack)
 }

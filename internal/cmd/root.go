@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
 	"net/http"
 	"strconv"
@@ -41,24 +40,18 @@ func Exec() {
 		offer := webrtc.SessionDescription{}
 		signal.Decode(session.Sdp, &offer)
 
-		fmt.Println(isSender, userID, peerID)
+		peerConnection, _ := api.NewPeerConnection(peerConnectionConfig)
+		_ = peerConnection.SetRemoteDescription(offer)
+
+		if !isSender {
+			receiveTrack(peerConnection, peerConnectionMap, peerID)
+		}
 	})
-
-	peerConnection, _ := api.NewPeerConnection(peerConnectionConfig)
-
-	_ = peerConnection.SetRemoteDescription(offer)
-
-	answer, _ := peerConnection.CreateAnswer(nil)
-
-	err := peerConnection.SetLocalDescription(answer)
-	if err != nil {
-		panic(err)
-	}
 
 	_ = router.Run(":8080")
 }
 
-func recieveTrack(
+func receiveTrack(
 	bobPeerConnection *webrtc.PeerConnection,
 	peerConnectionMap map[string]chan *webrtc.Track,
 	AliceID string) {

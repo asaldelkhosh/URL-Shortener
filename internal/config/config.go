@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
+	"github.com/amirhnajafiz/Blue-sky/internal/room"
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
@@ -12,6 +13,7 @@ import (
 
 type Config struct {
 	Address string        `koanf:"address"`
+	Room    room.Config   `koanf:"room"`
 	Signal  signal.Config `koanf:"signal"`
 }
 

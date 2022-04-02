@@ -3,6 +3,7 @@ package config
 import (
 	"log"
 
+	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
@@ -10,6 +11,7 @@ import (
 )
 
 type Config struct {
+	Signal signal.Config `koanf:"signal"`
 }
 
 func Load() Config {

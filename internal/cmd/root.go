@@ -3,10 +3,15 @@ package cmd
 import (
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/media"
 	"github.com/gin-gonic/gin"
 	"github.com/pion/webrtc/v2"
+)
+
+const (
+	rtcpPLIInterval = time.Second * 3
 )
 
 type Sdp struct {
@@ -14,6 +19,9 @@ type Sdp struct {
 }
 
 func Exec() {
+	// sender to channel of track
+	peerConnectionMap := make(map[string]chan *webrtc.Track)
+
 	peerConnectionConfig := media.GetPeerConfig()
 	api := media.GetMediaAPI()
 

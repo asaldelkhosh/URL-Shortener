@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
 	"net/http"
 	"strconv"
 	"time"
@@ -37,10 +38,11 @@ func Exec() {
 			return
 		}
 
+		offer := webrtc.SessionDescription{}
+		signal.Decode(session.Sdp, &offer)
+
 		fmt.Println(isSender, userID, peerID)
 	})
-
-	offer := webrtc.SessionDescription{}
 
 	peerConnection, _ := api.NewPeerConnection(peerConnectionConfig)
 

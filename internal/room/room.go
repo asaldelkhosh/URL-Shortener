@@ -1,6 +1,10 @@
 package room
 
-import "github.com/pion/webrtc/v2"
+import (
+	"fmt"
+
+	"github.com/pion/webrtc/v2"
+)
 
 var rooms []Room
 
@@ -20,4 +24,14 @@ func New(id string) Room {
 	rooms = append(rooms, room)
 
 	return room
+}
+
+func Find(id string) (*Room, error) {
+	for _, room := range rooms {
+		if room.Id == id && room.Available {
+			return &room, nil
+		}
+	}
+
+	return nil, fmt.Errorf("room not found: %v", id)
 }

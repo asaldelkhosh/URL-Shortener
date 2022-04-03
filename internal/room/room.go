@@ -35,3 +35,13 @@ func Find(id string) (*Room, error) {
 
 	return nil, fmt.Errorf("room not found: %v", id)
 }
+
+func Close(id string) {
+	for _, room := range rooms {
+		if room.Id == id {
+			room.Available = false
+
+			break
+		}
+	}
+}

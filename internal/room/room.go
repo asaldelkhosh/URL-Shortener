@@ -11,13 +11,15 @@ var rooms []Room
 type Room struct {
 	Id                string
 	Available         bool
+	Admin             string
 	PeerConnectionMap map[string]chan *webrtc.Track
 }
 
-func New(id string) Room {
+func New(id string, admin string) Room {
 	room := Room{
 		Id:                id,
 		Available:         true,
+		Admin:             admin,
 		PeerConnectionMap: make(map[string]chan *webrtc.Track),
 	}
 

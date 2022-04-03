@@ -5,7 +5,6 @@ import (
 	"strconv"
 
 	"github.com/amirhnajafiz/Blue-sky/internal/config"
-	"github.com/amirhnajafiz/Blue-sky/internal/pion/media"
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/track"
 	"github.com/gin-gonic/gin"
@@ -23,7 +22,7 @@ type Handler struct {
 	PeerConnectionConfig webrtc.Configuration
 }
 
-func (h *Handler) Call(c *gin.Context) {
+func (h Handler) Call(c *gin.Context) {
 	isSender, _ := strconv.ParseBool(c.Param("isSender"))
 	userID := c.Param("userID")
 	peerID := c.Param("peerId")
@@ -47,11 +46,6 @@ func (h *Handler) Call(c *gin.Context) {
 	}
 }
 
-func (h *Handler) Register(cfg config.Config, app *gin.RouterGroup) {
-	h.Cfg = cfg
-	h.PeerConnectionMap = make(map[string]chan *webrtc.Track)
-	h.Api = media.GetMediaAPI()
-	h.PeerConnectionConfig = media.GetPeerConfig()
-
+func (h Handler) Register(app *gin.RouterGroup) {
 	app.POST("/webrtc/sdp/m/:meetingId/c/:userID/p/:peerId/s/:isSender", h.Call)
 }

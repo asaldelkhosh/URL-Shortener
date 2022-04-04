@@ -38,9 +38,9 @@ func Find(id string) (*Room, error) {
 	return nil, fmt.Errorf("room not found: %v", id)
 }
 
-func Close(id string) {
+func Close(id string, admin string) {
 	for _, room := range rooms {
-		if room.Id == id {
+		if room.Id == id && room.Admin == admin {
 			room.Available = false
 
 			break

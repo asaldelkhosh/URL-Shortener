@@ -71,6 +71,20 @@ func (h Handler) NewRoom(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"id": id})
 }
 
+func (h Handler) CloseRoom(c *gin.Context) {
+	meetID := c.Param("meetingId")
+	admin, ok := c.Get("user_id")
+	if !ok {
+		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Errorf("user id field not found")})
+
+		return
+	}
+
+	room.Close(meetID, admin.(string))
+
+	c.String(http.StatusNoContent, "room closed")
+}
+
 func (h Handler) Register(app *gin.RouterGroup) {
 	app.POST("/webrtc/sdp/m/:meetingId/c/:userID/p/:peerId/s/:isSender", h.Call)
 }

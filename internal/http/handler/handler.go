@@ -1,8 +1,10 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/amirhnajafiz/Blue-sky/internal/config"
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
@@ -53,6 +55,20 @@ func (h Handler) Call(c *gin.Context) {
 	} else {
 		track.CreateTrack(peerConnection, r.PeerConnectionMap, userID)
 	}
+}
+
+func (h Handler) NewRoom(c *gin.Context) {
+	admin, ok := c.Get("user_id")
+	if !ok {
+		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Errorf("user id field not found")})
+
+		return
+	}
+
+	id := time.Millisecond.String()
+	room.New(id, admin.(string))
+
+	c.JSON(http.StatusCreated, gin.H{"id": id})
 }
 
 func (h Handler) Register(app *gin.RouterGroup) {

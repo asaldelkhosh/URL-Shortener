@@ -87,4 +87,6 @@ func (h Handler) CloseRoom(c *gin.Context) {
 
 func (h Handler) Register(app *gin.RouterGroup) {
 	app.POST("/webrtc/sdp/m/:meetingId/c/:userID/p/:peerId/s/:isSender", h.Call)
+	app.PUT("/webrtc/room", h.NewRoom)
+	app.DELETE("/webrtc/room/:meetingId", h.CloseRoom)
 }

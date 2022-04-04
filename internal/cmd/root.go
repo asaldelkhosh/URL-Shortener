@@ -5,7 +5,6 @@ import (
 	"github.com/amirhnajafiz/Blue-sky/internal/http/handler"
 	"github.com/amirhnajafiz/Blue-sky/internal/pion/media"
 	"github.com/gin-gonic/gin"
-	"github.com/pion/webrtc/v2"
 )
 
 func Exec() {
@@ -14,7 +13,6 @@ func Exec() {
 
 	handler.Handler{
 		Cfg:                  cfg,
-		PeerConnectionMap:    make(map[string]chan *webrtc.Track),
 		Api:                  media.GetMediaAPI(),
 		PeerConnectionConfig: media.GetPeerConfig(),
 	}.Register(router.Group("api"))

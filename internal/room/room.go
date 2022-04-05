@@ -28,8 +28,14 @@ func New(id string, admin string) Room {
 	return room
 }
 
-func All() []Room {
-	return rooms
+func All() []string {
+	var ids []string
+
+	for _, room := range rooms {
+		ids = append(ids, room.Id)
+	}
+
+	return ids
 }
 
 func Find(id string) (*Room, error) {

@@ -85,8 +85,13 @@ func (h Handler) CloseRoom(c *gin.Context) {
 	c.String(http.StatusNoContent, "room closed")
 }
 
+func (h Handler) AllRooms(c *gin.Context) {
+	// c.JSON(http.StatusOK, room.All())
+}
+
 func (h Handler) Register(app *gin.RouterGroup) {
 	app.POST("/webrtc/sdp/m/:meetingId/c/:userID/p/:peerId/s/:isSender", h.Call)
 	app.PUT("/webrtc/room", h.NewRoom)
 	app.DELETE("/webrtc/room/:meetingId", h.CloseRoom)
+	app.GET("webrtc/room", h.AllRooms)
 }

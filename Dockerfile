@@ -19,6 +19,6 @@ FROM alpine:latest
 
 WORKDIR /app/
 
-COPY --from=builder /blue-sky.
+COPY --from=builder /blue-sky .
 
 ENTRYPOINT ["./blue-sky"]

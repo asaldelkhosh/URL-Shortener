@@ -42,7 +42,6 @@ Blue sky is an application for holding video conference, build with WebRTC.
 | Route    | /webrtc/sdp/m/:meetingId/c/:userID/p/:peerId/s/:isSender |
 | Method   | POST                                                     |
 
-                                                        |
 
 #### Close a room
 | Syntax    | Description             |

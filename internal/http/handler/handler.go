@@ -86,7 +86,7 @@ func (h Handler) CloseRoom(c *gin.Context) {
 }
 
 func (h Handler) AllRooms(c *gin.Context) {
-	// c.JSON(http.StatusOK, room.All())
+	c.JSON(http.StatusOK, room.All())
 }
 
 func (h Handler) Register(app *gin.RouterGroup) {

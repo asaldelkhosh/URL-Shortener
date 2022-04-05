@@ -28,6 +28,10 @@ func New(id string, admin string) Room {
 	return room
 }
 
+func All() []Room {
+	return rooms
+}
+
 func Find(id string) (*Room, error) {
 	for _, room := range rooms {
 		if room.Id == id && room.Available {

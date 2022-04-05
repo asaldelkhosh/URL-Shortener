@@ -56,6 +56,14 @@ Blue sky is an application for holding video conference, build with WebRTC.
 }
 ```
 
+## Start the service
+To start the service:
+```shell
+docker-compose up -d
+```
+
+Image name should be **'node-app'**.
+
 ## Deploy
 To deploy the project on kubernetes:
 ````shell

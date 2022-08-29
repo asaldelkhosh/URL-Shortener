@@ -1,8 +1,22 @@
-# Blue-sky
+<p align="center">
+    <img src="assets/logo.webp" width="400" alt="logo" />
+</p>
 
-Blue sky is an application for holding video conference, build with WebRTC.
+<h1 align="center">
+Blue Sky
+</h1>
 
-## How to use?
+Blue sky is an application for holding video conference, build with **WebRTC**. The main
+idea behind this project was to work with **PION** and
+webRTC in Golang.
+
+## How to use the project?
+### Start
+Clone and start server:
+```shell
+go run main.go
+```
+
 #### Create a new room
 | Syntax    | Description  |
 |-----------|--------------|
@@ -55,14 +69,6 @@ Blue sky is an application for holding video conference, build with WebRTC.
   "user_id": "[room admin]"
 }
 ```
-
-## Start the service
-To start the service:
-```shell
-docker-compose up -d
-```
-
-Image name should be **'node-app'**.
 
 ## Deploy
 To deploy the project on kubernetes:

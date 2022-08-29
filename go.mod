@@ -1,6 +1,6 @@
-module github.com/amirhnajafiz/Blue-sky
+module github.com/amirhnajafiz/blue-sky
 
-go 1.17
+go 1.18
 
 require (
 	github.com/gin-gonic/gin v1.7.7

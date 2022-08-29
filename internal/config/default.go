@@ -1,8 +1,8 @@
 package config
 
 import (
-	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
-	"github.com/amirhnajafiz/Blue-sky/internal/room"
+	"github.com/amirhnajafiz/blue-sky/internal/pion/signal"
+	"github.com/amirhnajafiz/blue-sky/internal/room"
 )
 
 func Default() Config {

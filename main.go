@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/amirhnajafiz/Blue-sky/internal/cmd"
+	"github.com/amirhnajafiz/blue-sky/internal/cmd"
 )
 
 func main() {

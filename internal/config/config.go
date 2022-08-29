@@ -3,8 +3,8 @@ package config
 import (
 	"log"
 
-	"github.com/amirhnajafiz/Blue-sky/internal/pion/signal"
-	"github.com/amirhnajafiz/Blue-sky/internal/room"
+	"github.com/amirhnajafiz/blue-sky/internal/pion/signal"
+	"github.com/amirhnajafiz/blue-sky/internal/room"
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"

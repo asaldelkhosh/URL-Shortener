@@ -3,18 +3,23 @@ module github.com/amirhnajafiz/Blue-sky
 go 1.17
 
 require (
+	github.com/gin-gonic/gin v1.7.7
+	github.com/knadh/koanf v1.4.0
+	github.com/pion/rtcp v1.2.9
+	github.com/pion/webrtc/v2 v2.2.26
+)
+
+require (
 	github.com/cheekybits/genny v1.0.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/gin-gonic/gin v1.7.7 // indirect
 	github.com/go-playground/locales v0.13.0 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/golang/protobuf v1.3.3 // indirect
 	github.com/google/uuid v1.1.1 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
-	github.com/knadh/koanf v1.4.0 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/lucas-clemente/quic-go v0.7.1-0.20190401152353-907071221cf9 // indirect
 	github.com/marten-seemann/qtls v0.2.3 // indirect
@@ -31,7 +36,6 @@ require (
 	github.com/pion/mdns v0.0.4 // indirect
 	github.com/pion/quic v0.1.1 // indirect
 	github.com/pion/randutil v0.1.0 // indirect
-	github.com/pion/rtcp v1.2.9 // indirect
 	github.com/pion/rtp v1.6.0 // indirect
 	github.com/pion/sctp v1.7.10 // indirect
 	github.com/pion/sdp/v2 v2.4.0 // indirect
@@ -40,10 +44,6 @@ require (
 	github.com/pion/transport v0.10.1 // indirect
 	github.com/pion/turn/v2 v2.0.4 // indirect
 	github.com/pion/udp v0.1.0 // indirect
-	github.com/pion/webrtc/v2 v2.2.26 // indirect
-	github.com/pions/dtls v1.0.2 // indirect
-	github.com/pions/pkg v0.0.0-20181115215726-b60cd756f712 // indirect
-	github.com/pions/webrtc v1.2.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect
 	golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899 // indirect

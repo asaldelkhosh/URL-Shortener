@@ -26,17 +26,21 @@ func Decode(compress bool, in string, obj interface{}) {
 
 func unzip(in []byte) []byte {
 	var b bytes.Buffer
+
 	_, err := b.Write(in)
 	if err != nil {
 		panic(err)
 	}
+
 	r, err := gzip.NewReader(&b)
 	if err != nil {
 		panic(err)
 	}
+
 	res, err := ioutil.ReadAll(r)
 	if err != nil {
 		panic(err)
 	}
+
 	return res
 }

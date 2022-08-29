@@ -15,7 +15,7 @@ import (
 )
 
 type Sdp struct {
-	Sdp string
+	Sdp string `json:"sdp"`
 }
 
 type Handler struct {
@@ -24,7 +24,7 @@ type Handler struct {
 	PeerConnectionConfig webrtc.Configuration
 }
 
-func (h Handler) Call(c *gin.Context) {
+func (h Handler) call(c *gin.Context) {
 	isSender, _ := strconv.ParseBool(c.Param("isSender"))
 	userID := c.Param("userID")
 	peerID := c.Param("peerId")
@@ -57,7 +57,7 @@ func (h Handler) Call(c *gin.Context) {
 	}
 }
 
-func (h Handler) NewRoom(c *gin.Context) {
+func (h Handler) newRoom(c *gin.Context) {
 	admin, ok := c.Get("user_id")
 	if !ok {
 		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Errorf("user id field not found")})
@@ -71,8 +71,9 @@ func (h Handler) NewRoom(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"id": id})
 }
 
-func (h Handler) CloseRoom(c *gin.Context) {
+func (h Handler) closeRoom(c *gin.Context) {
 	meetID := c.Param("meetingId")
+
 	admin, ok := c.Get("user_id")
 	if !ok {
 		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Errorf("user id field not found")})
@@ -85,13 +86,16 @@ func (h Handler) CloseRoom(c *gin.Context) {
 	c.String(http.StatusNoContent, "room closed")
 }
 
-func (h Handler) AllRooms(c *gin.Context) {
+func (h Handler) allRooms(c *gin.Context) {
 	c.JSON(http.StatusOK, room.All())
 }
 
 func (h Handler) Register(app *gin.RouterGroup) {
-	app.POST("/webrtc/sdp/m/:meetingId/c/:userID/p/:peerId/s/:isSender", h.Call)
-	app.PUT("/webrtc/room", h.NewRoom)
-	app.DELETE("/webrtc/room/:meetingId", h.CloseRoom)
-	app.GET("/webrtc/room", h.AllRooms)
+	app.POST("/webrtc/sdp/m/:meetingId/c/:userID/p/:peerId/s/:isSender", h.call)
+
+	app.PUT("/webrtc/room", h.newRoom)
+
+	app.DELETE("/webrtc/room/:meetingId", h.closeRoom)
+
+	app.GET("/webrtc/room", h.allRooms)
 }

@@ -7,8 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Exec() {
+func Execute() {
 	cfg := config.Load()
+
 	router := gin.Default()
 
 	handler.Handler{
@@ -17,5 +18,7 @@ func Exec() {
 		PeerConnectionConfig: media.GetPeerConfig(),
 	}.Register(router.Group("api"))
 
-	_ = router.Run(cfg.Address)
+	if err := router.Run(cfg.Address); err != nil {
+		panic(err)
+	}
 }

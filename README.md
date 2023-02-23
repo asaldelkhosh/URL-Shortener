@@ -76,3 +76,17 @@ To deploy the project on kubernetes:
 kubectl apply -f ./deploy/deployments.yaml
 kubectl apply -f ./deploy/service.yaml
 ````
+
+## Resources
+
+- https://www.tutorialspoint.com/webrtc/index.htm
+- https://www.researchgate.net/publication/322511267_eeDTLS_Energy-Efficient_Datagram_Transport_Layer_Security_for_the_Internet_of_Things
+- https://telnyx.com/resources/webrtc-servers-explained
+- https://webrtccourse.com/
+- https://w3c.github.io/webrtc-pc/
+- https://ortc.org/
+- https://webrtc.github.io/samples/
+- https://github.com/pion/webrtc
+- https://gabrieltanner.org/blog/broadcasting-ion-sfu/
+- https://webrtcforthecurious.com/
+- https://www.manning.com/books/real-world-cryptography

@@ -2,10 +2,6 @@
     <img src="assets/logo.webp" width="400" alt="logo" />
 </p>
 
-<h1 align="center">
-Blue Sky
-</h1>
-
 Blue sky is an application for holding video conference, build with **WebRTC**. The main
 idea behind this project was to work with **PION** and
 webRTC in Golang.

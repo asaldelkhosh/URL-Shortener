@@ -1,7 +1,0 @@
-address: ":8080"
-room:
-  rooms: 10
-  capacity: 5
-  prefix: "blue-sky "
-signal:
-  compress: false

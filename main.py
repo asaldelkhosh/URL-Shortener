@@ -1,6 +1,6 @@
 import sqlite3
 import os
-from flask import Flask
+from flask import Flask, render_template
 
 from database.query import Query
 
@@ -33,16 +33,16 @@ if migrate:
 
 # create a new flask app
 app = Flask(__name__,
-            static_url_path='', 
+            static_url_path='/', 
             static_folder='web/static',
-            template_folder='web/templates')
+            template_folder='web/template')
 
 
 # creating http routes
 
 @app.route("/") # return the home page
 def index():
-  pass
+  return render_template('index.html')
 
 @app.route("/url", methods=['GET']) # return all of the urls
 def getURLs():

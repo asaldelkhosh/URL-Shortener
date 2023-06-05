@@ -32,8 +32,10 @@ if migrate:
 
 
 # create a new flask app
-app = Flask(__name__)
-
+app = Flask(__name__,
+            static_url_path='', 
+            static_folder='web/static',
+            template_folder='web/templates')
 
 
 # creating http routes

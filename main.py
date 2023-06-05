@@ -2,12 +2,12 @@ import sqlite3
 import os
 from flask import Flask
 
-from query import Query
+from database.query import Query
 
 
 
 # address to sql file
-DATABASE_FILE = "sql.db"
+DATABASE_FILE = "./database/sql.db"
 
 
 migrate = False # migrate is used in order to create tables

@@ -1,6 +1,8 @@
 import sqlite3
 import os
 from flask import Flask, render_template, request
+import requests
+import json
 
 from database.query import Query
 
@@ -8,6 +10,8 @@ from database.query import Query
 
 # address to sql file
 DATABASE_FILE = "./database/sql.db"
+API_HOST = "https://yun.ir/api/v1/urls"
+API_TOKEN = "1873:b0zc8c1x9m0ococ8ggsowck4ggco08s"
 
 
 migrate = False # migrate is used in order to create tables
@@ -65,8 +69,23 @@ def createURL():
   # get request content
   content = request.get_json(silent=True)
   
+  title = content['url'].replace("http://", "").replace("https://", "")
+  
+  data = {
+    "title": title,
+    "url": content['url'],
+  }
+  
+  headers = {
+    'Content-Type': 'application/json',
+    'X-API-Key': API_TOKEN,
+  }
+  
+  res = requests.post(API_HOST, data=json.dumps(data), headers=headers)
+  resJSON = res.json()
+  
   # save it into database
-  cur.execute(queryParser.createURL(content['url'], content['url']))
+  cur.execute(queryParser.createURL(content['url'], resJSON['doc']['url']))
   dbConnection.commit()
   
   return 'OK'

@@ -22,13 +22,16 @@ if not os.path.exists(DATABASE_FILE):
 
 
 # connect to sqlite database
-dbConnection = sqlite3.connect(DATABASE_FILE)
+dbConnection = sqlite3.connect(DATABASE_FILE, check_same_thread=False)
 print('[INFO] connection stablished')
 
 # create tables if not exists
 if migrate:
   dbConnection.execute(queryParser.createTable())
   print('[INFO] migration successed')
+  
+# create curser for database connection
+cur = dbConnection.cursor()
 
 
 # create a new flask app
@@ -46,14 +49,11 @@ def index():
 
 @app.route("/url", methods=['GET']) # return all of the urls
 def getURLs():
-  cur = dbConnection.cursor()
   urls = []
   
   # get all urls
   for row in cur.execute(queryParser.getAll()):
     urls.append(row)
-    
-  cur.close()
   
   return urls
   
@@ -64,19 +64,15 @@ def createURL():
   content = request.get_json(silent=True)
   
   # save it into database
-  cur = dbConnection.cursor()
   cur.execute(queryParser.createURL(content['url'], content['url']))
-  cur.close()
   
   return 'OK'
   
 
-@app.route("/url/<id>", methods=['POST']) # remove an url
+@app.route("/url/<id>", methods=['GET']) # remove an url
 def deleteURL(id):
   # remove url by id
-  cur = dbConnection.cursor()
   cur.execute(queryParser.removeURL(int(id)))
-  cur.close()
   
   return 'OK'
 

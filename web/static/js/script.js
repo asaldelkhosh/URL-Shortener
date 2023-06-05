@@ -1,12 +1,8 @@
-const host = '127.0.0.1:3000';
-
-
-
 // create a new url by executing a fetch
 function createURL() {
     let data = document.getElementById('url-input').value
 
-    fetch(host+"/url",
+    fetch("/url",
         {
             headers: {
                 'Accept': 'application/json',
@@ -26,10 +22,24 @@ function createURL() {
 
 // remove a url by executing a fetch
 function removeURL(id) {
-
+    fetch("/url/"+id)
+        .then(() => {
+            window.location.reload()
+        })
+        .catch((error) => {
+            console.error(error)
+            alert('Failed to remove URL!')
+        })
 }
 
 // get all urls by executing a fetch
 function getURLs() {
-
+    fetch("/url")
+        .then((response) => {
+            console.log(response.json())
+        })
+        .catch((error) => {
+            console.error(error)
+            alert('Failed to get URLs!')
+        })
 }

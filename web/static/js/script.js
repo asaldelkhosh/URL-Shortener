@@ -46,6 +46,7 @@ function getURLs() {
             let rsp = document.getElementById('urls');
             data['urls'].forEach(element => {
                 let tmp = document.createElement("li");
+                tmp.style.marginBlockEnd = "20px";
 
                 let btn = document.createElement("button")
                 btn.innerText = "Delete"
@@ -60,7 +61,7 @@ function getURLs() {
                 title.style.marginInlineEnd = "40px";
 
                 let url = document.createElement("a");
-                url.href = element[2];
+                url.href = 'https://' + element[2];
                 url.innerText = element[2];
 
                 tmp.appendChild(btn)

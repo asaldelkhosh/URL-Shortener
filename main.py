@@ -67,6 +67,7 @@ def createURL():
   
   # save it into database
   cur.execute(queryParser.createURL(content['url'], content['url']))
+  dbConnection.commit()
   
   return 'OK'
   
@@ -75,6 +76,7 @@ def createURL():
 def deleteURL(id):
   # remove url by id
   cur.execute(queryParser.removeURL(int(id)))
+  dbConnection.commit()
   
   return 'OK'
 

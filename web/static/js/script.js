@@ -47,12 +47,23 @@ function getURLs() {
             data['urls'].forEach(element => {
                 let tmp = document.createElement("li");
 
+                let btn = document.createElement("button")
+                btn.innerText = "Delete"
+                btn.onclick = function() {
+                    removeURL(element[0]);
+                };
+                btn.style.marginInlineEnd = "20px";
+
+
                 let title = document.createElement("span");
                 title.innerHTML = element[1];
+                title.style.marginInlineEnd = "25px";
 
                 let url = document.createElement("a");
                 url.href = element[2];
+                url.innerText = element[2];
 
+                tmp.appendChild(btn)
                 tmp.appendChild(title);
                 tmp.appendChild(url);
 

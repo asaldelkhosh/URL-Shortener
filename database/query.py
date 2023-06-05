@@ -24,7 +24,7 @@ class Query(object):
             str: insert query
         """
         return f'''
-            insert into urls values ("{url}", "{short}");
+            insert into urls (url, short) values ("{url}", "{short}");
         '''
     
     def getAll(self):

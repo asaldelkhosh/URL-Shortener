@@ -55,7 +55,9 @@ def getURLs():
   for row in cur.execute(queryParser.getAll()):
     urls.append(row)
   
-  return urls
+  return {
+    'urls': urls
+  }
   
 
 @app.route("/url", methods=['POST']) # create a new url

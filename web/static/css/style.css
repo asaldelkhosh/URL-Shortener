@@ -6,7 +6,7 @@
 }
 
 #app {
-    inline-size: 75%;
+    inline-size: 60%;
     margin: 100px auto;
 }
 
@@ -21,3 +21,27 @@
 .title {
     margin-block-end: 30px;
 }
+
+.btn {
+    border: 0 solid black;
+    outline: none;
+    padding: 5px;
+    border-radius: 3px;
+    color: aliceblue;
+}
+
+.btn-green {
+    background-color: rgb(0, 174, 0);
+}
+
+.btn-green:hover {
+    background-color: rgb(0, 133, 0);
+}
+
+.btn-red {
+    background-color: rgb(146, 0, 0);
+}
+
+.btn-red:hover {
+    background-color: rgb(102, 0, 0);
+} 

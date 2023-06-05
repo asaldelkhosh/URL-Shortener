@@ -53,11 +53,11 @@ function getURLs() {
                     removeURL(element[0]);
                 };
                 btn.style.marginInlineEnd = "20px";
-
+                btn.classList.add('btn', 'btn-red')
 
                 let title = document.createElement("span");
-                title.innerHTML = element[1];
-                title.style.marginInlineEnd = "25px";
+                title.innerHTML = element[1] + " :";
+                title.style.marginInlineEnd = "40px";
 
                 let url = document.createElement("a");
                 url.href = element[2];

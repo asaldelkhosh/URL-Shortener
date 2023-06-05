@@ -1,10 +1,17 @@
-import mysql.connector
+import sqlite3
+import os
 
 
 
-# connect to mysql
-dbConnection = mysql.connector.connect(
-  host="localhost",
-  user="yourusername",
-  password="yourpassword"
-)
+# address to sql file
+DATABASE_FILE = "sql.db"
+
+
+# create database file
+if not os.path.exists(DATABASE_FILE):
+  f = open(DATABASE_FILE, "a")
+  f.close()
+
+
+# connect to sqlite database
+dbConnection = sqlite3.connect(DATABASE_FILE)

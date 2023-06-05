@@ -22,7 +22,9 @@ if not os.path.exists(DATABASE_FILE):
 
 # connect to sqlite database
 dbConnection = sqlite3.connect(DATABASE_FILE)
+print('[INFO] connection stablished')
 
 # create tables if not exists
 if migrate:
   dbConnection.execute(queryParser.createTable())
+  print('[INFO] migration successed')

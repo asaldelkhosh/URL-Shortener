@@ -12,25 +12,30 @@
         </title>
     </head>
     <body>
-        <h1>
-            Welcome to URL Shortner
-        </h1>
-        <div>
-            <h2>
-                Create a new URL
-            </h2>
-            <label>
-                Enter URL:
-            </label>
-            <input type="text" id="url-input" />
-        </div>
-        <div>
-            <h2>
-                List of Existing URLs
-            </h2>
-            <ul id="urls">
-
-            </ul>
+        <div id="app">
+            <h1 class="header">
+                Welcome to URL Shortner
+            </h1>
+            <div class="holder">
+                <h2 class="title">
+                    Create a new URL
+                </h2>
+                <label>
+                    Enter URL:
+                </label>
+                <input type="text" id="url-input" />
+                <button>
+                    Create
+                </button>
+            </div>
+            <div class="holder">
+                <h2 class="title">
+                    List of Existing URLs
+                </h2>
+                <ul id="urls">
+                    
+                </ul>
+            </div>
         </div>
         <!-- JS files -->
         <script src="/js/script.js"></script>

@@ -1,6 +1,6 @@
 import sqlite3
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 from database.query import Query
 
@@ -46,15 +46,39 @@ def index():
 
 @app.route("/url", methods=['GET']) # return all of the urls
 def getURLs():
-  pass
+  cur = dbConnection.cursor()
+  urls = []
+  
+  # get all urls
+  for row in cur.execute(queryParser.getAll()):
+    urls.append(row)
+    
+  cur.close()
+  
+  return urls
+  
 
 @app.route("/url", methods=['POST']) # create a new url
 def createURL():
-  pass
+  # get request content
+  content = request.get_json(silent=True)
+  
+  # save it into database
+  cur = dbConnection.cursor()
+  cur.execute(queryParser.createURL(content['url'], content['url']))
+  cur.close()
+  
+  return 'OK'
+  
 
 @app.route("/url/<id>", methods=['POST']) # remove an url
-def deleteURL():
-  pass
+def deleteURL(id):
+  # remove url by id
+  cur = dbConnection.cursor()
+  cur.execute(queryParser.removeURL(int(id)))
+  cur.close()
+  
+  return 'OK'
 
 
 

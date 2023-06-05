@@ -2,4 +2,22 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: monospace;
+}
+
+#app {
+    inline-size: 75%;
+    margin: 100px auto;
+}
+
+.header {
+    margin-block-end: 60px;
+}
+
+.holder {
+    padding: 30px;
+}
+
+.title {
+    margin-block-end: 30px;
 }

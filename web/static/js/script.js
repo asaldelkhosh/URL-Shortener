@@ -11,8 +11,22 @@ function createURL() {
             method: "POST",
             body: JSON.stringify({'url': data})
         })
-        .then(() => {
-            window.location.reload()
+        .then(response => response.text())
+        .then((data) => {
+            let el = document.getElementById('url-result');
+            el.innerHTML = '';
+
+            let label = document.createElement("span");
+            label.innerText = "Your URL is: ";
+
+            let url = document.createElement("a");
+            url.href = 'https://' + data;
+            url.innerText = data;
+
+            el.appendChild(label);
+            el.appendChild(url);
+
+            getURLs();
         })
         .catch((error) => {
             console.error(error)
@@ -44,6 +58,8 @@ function getURLs() {
         .then(response => response.json())
         .then((data) => {
             let rsp = document.getElementById('urls');
+            rsp.innerHTML = '';
+
             data['urls'].forEach(element => {
                 let tmp = document.createElement("li");
                 tmp.style.marginBlockEnd = "20px";
@@ -68,7 +84,8 @@ function getURLs() {
                 url.href = 'https://' + element[2];
                 url.innerText = element[2];
 
-                tmp.appendChild(btn)
+                tmp.appendChild(count);
+                tmp.appendChild(btn);
                 tmp.appendChild(title);
                 tmp.appendChild(url);
 

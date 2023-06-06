@@ -53,7 +53,7 @@ class Query(object):
             str: insert query
         """
         return f'''
-            INSERT INTO urls (url, short, count, updated_at) VALUES ("{url}", "{short}", 0, "{time.time()}");
+            INSERT INTO urls (url, short, count, updated_at) VALUES ("{url}", "{short}", 1, "{time.time()}");
         '''
         
     def updateURL(self, id):

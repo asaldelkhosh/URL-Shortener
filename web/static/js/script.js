@@ -38,7 +38,7 @@ function createURL() {
 function removeURL(id) {
     fetch("/url/"+id)
         .then(() => {
-            window.location.reload()
+            getURLs();
         })
         .catch((error) => {
             console.error(error)
@@ -60,13 +60,22 @@ function getURLs() {
             let rsp = document.getElementById('urls');
             rsp.innerHTML = '';
 
+            if (data['urls'].length == 0) {
+                rsp.innerText = "No entities!";
+
+                return
+            }
+
+            const count = (number) => number.toString().length;
+            const zeroPad = (num) => String(num).padStart(count(data['urls'][0][3]), '0');
+
             data['urls'].forEach(element => {
                 let tmp = document.createElement("li");
                 tmp.style.marginBlockEnd = "20px";
 
                 let count = document.createElement("snap");
                 count.style.marginInlineEnd = "10px";
-                count.innerText = element[3];
+                count.innerText = zeroPad(element[3]);
 
                 let btn = document.createElement("button")
                 btn.innerText = "Delete"

@@ -130,12 +130,13 @@ function getHistory() {
             const count = (number) => number.toString().length;
             const zeroPad = (num) => String(num).padStart(count(data['urls'][0][3]), '0');
 
-            list = {}
+            let list = {};
 
             data['urls'].forEach(element => {
-                let key = element[4];
-                if (!key in list) {
-                    list[key] = [];
+                let key = new Date(element[4]).toLocaleDateString();
+
+                if (!(key in list)) {
+                    list[key] = [];   
                 }
 
                 list[key].push(element);
@@ -144,14 +145,18 @@ function getHistory() {
             for (const [key, value] of Object.entries(list)) {
                 let tmp = document.createElement("div");
 
-                let title = document.createElement("h3");
+                let title = document.createElement("h2");
                 title.innerText = key;
 
                 let ul = document.createElement("ul");
+                ul.style.listStyleType = 'none';
 
                 value.forEach(element => {
                     let li = document.createElement("li");
                     li.style.marginBlockEnd = "40px";
+
+                    let main = document.createElement("div");
+                    main.style.marginBlock = "20px";
     
                     let count = document.createElement("span");
                     count.style.marginInlineEnd = "10px";
@@ -164,6 +169,10 @@ function getHistory() {
                     };
                     btn.style.marginInlineEnd = "20px";
                     btn.classList.add('btn', 'btn-red');
+
+                    let modifyDate = document.createElement("span");
+                    modifyDate.style.marginInlineEnd = "10px";
+                    modifyDate.innerText = "Last use: " + element[5];
     
                     let title = document.createElement("span");
                     title.innerHTML = element[1] + " :";
@@ -172,17 +181,20 @@ function getHistory() {
                     let url = document.createElement("a");
                     url.href = 'https://' + element[2];
                     url.innerText = element[2];
+
+                    main.appendChild(title);
+                    main.appendChild(url);
     
+                    li.appendChild(main);
                     li.appendChild(count);
                     li.appendChild(btn);
-                    li.appendChild(title);
-                    li.appendChild(url);
+                    li.appendChild(modifyDate);
     
-                    ul.appendChild(tmp);
+                    ul.appendChild(li);
                 });
 
                 tmp.appendChild(title);
-                tmp.appendChild(ul)
+                tmp.appendChild(ul);
                 rsp.appendChild(tmp);
             }
         })

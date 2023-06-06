@@ -72,6 +72,10 @@ def createURL():
   # get request content
   content = request.get_json(silent=True)
   
+  row = cur.execute(queryParser.getURL(content['url']))
+  if len(row) > 0:
+    return row['short']
+  
   title = content['url'].replace("http://", "").replace("https://", "")
   
   data = {
@@ -91,7 +95,7 @@ def createURL():
   cur.execute(queryParser.createURL(content['url'], resJSON['doc']['url']))
   dbConnection.commit()
   
-  return 'OK'
+  return resJSON['doc']['url']
   
 
 @app.route("/url/<id>", methods=['GET']) # remove an url

@@ -51,6 +51,29 @@ def index():
   return render_template('index.html')
 
 
+@app.route("/history") # return the history page
+def history():
+  return render_template('history.html')
+
+
+@app.route("/history/data", methods=['GET']) # get all of the urls with history
+def getHistoryData():
+  # create curser for database connection
+  cur = dbConnection.cursor()
+
+  urls = []
+  
+  # get all urls
+  for row in cur.execute(queryParser.getAllByDate()):
+    urls.append(row)
+  
+  cur.close()
+  
+  return {
+    'urls': urls
+  }
+
+
 @app.route("/url", methods=['GET']) # return all of the urls
 def getURLs():
   # create curser for database connection

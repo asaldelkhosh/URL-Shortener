@@ -1,4 +1,4 @@
-import time
+import datetime
 
 
 
@@ -15,6 +15,7 @@ class Query(object):
                 url        VARCHAR(1024) NOT NULL,
                 short      VARCHAR(1024) NOT NULL,
                 count      INTEGER,
+                created_at TEXT,
                 updated_at TEXT
             );
         '''
@@ -53,7 +54,7 @@ class Query(object):
             str: insert query
         """
         return f'''
-            INSERT INTO urls (url, short, count, updated_at) VALUES ("{url}", "{short}", 1, "{time.time()}");
+            INSERT INTO urls (url, short, count, created_at, updated_at) VALUES ("{url}", "{short}", 1, "{datetime.datetime.now()}", "{datetime.datetime.now()}");
         '''
         
     def updateURL(self, id):
@@ -67,6 +68,16 @@ class Query(object):
         """
         return f'''
             UPDATE urls SET count = count + 1 WHERE id = {id};
+        '''
+    
+    def getAllByDate(self):
+        """get all urls by created day
+
+        Returns:
+            str: get all query
+        """
+        return '''
+            SELECT * FROM urls ORDER BY created_at desc;
         '''
     
     def getAll(self):

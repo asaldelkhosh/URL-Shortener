@@ -48,6 +48,10 @@ function getURLs() {
                 let tmp = document.createElement("li");
                 tmp.style.marginBlockEnd = "20px";
 
+                let count = document.createElement("snap");
+                count.style.marginInlineEnd = "10px";
+                count.innerText = element[3];
+
                 let btn = document.createElement("button")
                 btn.innerText = "Delete"
                 btn.onclick = function() {

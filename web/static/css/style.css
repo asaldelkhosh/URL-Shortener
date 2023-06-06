@@ -12,6 +12,8 @@
 
 .header {
     margin-block-end: 60px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .holder {

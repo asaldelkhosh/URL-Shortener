@@ -38,7 +38,7 @@ function createURL() {
 function removeURL(id) {
     fetch("/url/"+id)
         .then(() => {
-            getURLs();
+            getHistory();
         })
         .catch((error) => {
             console.error(error)
@@ -73,17 +73,9 @@ function getURLs() {
                 let tmp = document.createElement("li");
                 tmp.style.marginBlockEnd = "20px";
 
-                let count = document.createElement("snap");
-                count.style.marginInlineEnd = "10px";
-                count.innerText = zeroPad(element[3]);
-
-                let btn = document.createElement("button");
-                btn.innerText = "Delete";
-                btn.onclick = function() {
-                    removeURL(element[0]);
-                };
-                btn.style.marginInlineEnd = "20px";
-                btn.classList.add('btn', 'btn-red');
+                let count = document.createElement("span");
+                count.style.marginInlineEnd = "25px";
+                count.innerText = "Count: " + zeroPad(element[3]);
 
                 let title = document.createElement("span");
                 title.innerHTML = element[1] + " :";
@@ -94,7 +86,6 @@ function getURLs() {
                 url.innerText = element[2];
 
                 tmp.appendChild(count);
-                tmp.appendChild(btn);
                 tmp.appendChild(title);
                 tmp.appendChild(url);
 

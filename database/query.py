@@ -32,6 +32,19 @@ class Query(object):
         return f'''
             insert into urls (url, short, count, updated_at) values ("{url}", "{short}", 0, "{time.time()}");
         '''
+        
+    def updateURL(self, id):
+        """update count value of an url
+
+        Args:
+            id (int): url id
+
+        Returns:
+            str: update url query
+        """
+        return f'''
+            update urls set count = count + 1 where id = {id};
+        '''
     
     def getAll(self, limit):
         """get top 3 urls query
@@ -53,7 +66,7 @@ class Query(object):
             str: get url query
         """
         return f'''
-            select * from urls where url = "{url}"
+            select * from urls where url = "{url}";
         '''
     
     def removeURL(self, id):

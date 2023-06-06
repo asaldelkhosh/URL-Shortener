@@ -81,7 +81,10 @@ def createURL():
   
   # if data already exists
   data = cur.fetchone()
-  if data != None:   
+  if data != None:
+    cur.execute(queryParser.updateURL(data[0]))
+    dbConnection.commit()
+    
     cur.close()
      
     return data[2]

@@ -10,13 +10,22 @@ class Query(object):
             str: create table query
         """
         return '''
-            create table urls (
+            CREATE TABLE urls (
                 id         INTEGER PRIMARY KEY AUTOINCREMENT,
                 url        VARCHAR(1024) NOT NULL,
                 short      VARCHAR(1024) NOT NULL,
                 count      INTEGER,
                 updated_at TEXT,
             );
+        '''
+        
+    def removeTrigger(self):
+        return '''
+            CREATE TRIGGER remove_unused_urls AFTER update, insert, delete 
+            ON urls
+            BEGIN
+                DELETE FROM urls WHERE updated_at DATETIME(updated_at) < DATETIME('now', '-7 days');
+            END;
         '''
     
     def createURL(self, url, short):
@@ -30,7 +39,7 @@ class Query(object):
             str: insert query
         """
         return f'''
-            insert into urls (url, short, count, updated_at) values ("{url}", "{short}", 0, "{time.time()}");
+            INSERT INTO urls (url, short, count, updated_at) VALUES ("{url}", "{short}", 0, "{time.time()}");
         '''
         
     def updateURL(self, id):
@@ -43,7 +52,7 @@ class Query(object):
             str: update url query
         """
         return f'''
-            update urls set count = count + 1 where id = {id};
+            UPDATE urls SET count = count + 1 WHERE id = {id};
         '''
     
     def getAll(self, limit):
@@ -53,7 +62,7 @@ class Query(object):
             str: get all query
         """
         return f'''
-            select * from urls order by count desc limit {limit};
+            SELECT * FROM urls ORDER BY count desc LIMIT {limit};
         '''
     
     def getURL(self, url):
@@ -66,7 +75,7 @@ class Query(object):
             str: get url query
         """
         return f'''
-            select * from urls where url = "{url}";
+            SELECT * FROM urls WHERE url = "{url}";
         '''
     
     def removeURL(self, id):
@@ -79,5 +88,5 @@ class Query(object):
             str: remove query
         """
         return f'''
-            delete from urls where id = {id};
+            DELETE FROM urls WHERE id = {id};
         '''

@@ -124,13 +124,8 @@ def createURL():
     'X-API-Key': API_TOKEN,
   }
   
-  #res = requests.post(API_HOST, data=json.dumps(data), headers=headers)
-  #resJSON = res.json()
-  resJSON = {
-    'doc': {
-      'url': 'tmp'
-    }
-  }
+  res = requests.post(API_HOST, data=json.dumps(data), headers=headers)
+  resJSON = res.json()
   
   # save it into database
   cur.execute(queryParser.createURL(content['url'], resJSON['doc']['url']))

@@ -46,7 +46,6 @@ app = Flask(__name__,
             template_folder='web/template')
 
 
-
 # creating http routes
 
 @app.route("/") # return the home page
@@ -72,9 +71,12 @@ def createURL():
   # get request content
   content = request.get_json(silent=True)
   
-  row = cur.execute(queryParser.getURL(content['url']))
-  if len(row) > 0:
-    return row['short']
+  cur.execute(queryParser.getURL(content['url']))
+  
+  # if data already exists
+  data = cur.fetchone()
+  if data != None:    
+    return data[2]
   
   title = content['url'].replace("http://", "").replace("https://", "")
   
@@ -88,8 +90,13 @@ def createURL():
     'X-API-Key': API_TOKEN,
   }
   
-  res = requests.post(API_HOST, data=json.dumps(data), headers=headers)
-  resJSON = res.json()
+  #res = requests.post(API_HOST, data=json.dumps(data), headers=headers)
+  #resJSON = res.json()
+  resJSON = {
+    'doc': {
+      'url': 'tmp'
+    }
+  }
   
   # save it into database
   cur.execute(queryParser.createURL(content['url'], resJSON['doc']['url']))

@@ -15,16 +15,16 @@ class Query(object):
                 url        VARCHAR(1024) NOT NULL,
                 short      VARCHAR(1024) NOT NULL,
                 count      INTEGER,
-                updated_at TEXT,
+                updated_at TEXT
             );
         '''
         
     def removeTrigger(self):
         return '''
-            CREATE TRIGGER remove_unused_urls AFTER update, insert, delete 
+            CREATE TRIGGER remove_unused_urls BEFORE update 
             ON urls
             BEGIN
-                DELETE FROM urls WHERE updated_at DATETIME(updated_at) < DATETIME('now', '-7 days');
+                DELETE FROM urls WHERE datetime(updated_at) < datetime('now', '-7 day');
             END;
         '''
     

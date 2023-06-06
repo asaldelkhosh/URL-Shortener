@@ -33,10 +33,8 @@ print('[INFO] connection stablished')
 if migrate:
   dbConnection.execute(queryParser.createTable())
   dbConnection.execute(queryParser.removeTrigger())
+  dbConnection.execute(queryParser.getAllView(3))
   print('[INFO] migration successed')
-  
-# create curser for database connection
-cur = dbConnection.cursor()
 
 
 # create a new flask app
@@ -55,11 +53,16 @@ def index():
 
 @app.route("/url", methods=['GET']) # return all of the urls
 def getURLs():
+  # create curser for database connection
+  cur = dbConnection.cursor()
+
   urls = []
   
   # get all urls
   for row in cur.execute(queryParser.getAll()):
     urls.append(row)
+  
+  cur.close()
   
   return {
     'urls': urls
@@ -68,6 +71,9 @@ def getURLs():
 
 @app.route("/url", methods=['POST']) # create a new url
 def createURL():
+  # create curser for database connection
+  cur = dbConnection.cursor()
+  
   # get request content
   content = request.get_json(silent=True)
   
@@ -75,7 +81,9 @@ def createURL():
   
   # if data already exists
   data = cur.fetchone()
-  if data != None:    
+  if data != None:   
+    cur.close()
+     
     return data[2]
   
   title = content['url'].replace("http://", "").replace("https://", "")
@@ -102,22 +110,34 @@ def createURL():
   cur.execute(queryParser.createURL(content['url'], resJSON['doc']['url']))
   dbConnection.commit()
   
+  cur.close()
+  
   return resJSON['doc']['url']
   
 
 @app.route("/url/<id>", methods=['GET']) # remove an url
 def deleteURL(id):
+  # create curser for database connection
+  cur = dbConnection.cursor()
+  
   # remove url by id
   cur.execute(queryParser.removeURL(int(id)))
   dbConnection.commit()
+  
+  cur.close()
   
   return 'OK'
 
 
 @app.route("/url/<id>", methods=['POST']) # update an url
 def updateURL(id):
+  # create curser for database connection
+  cur = dbConnection.cursor()
+  
   cur.execute(queryParser.updateURL(int(id)))
   dbConnection.commit()
+  
+  cur.close()
   
   return 'OK'
 

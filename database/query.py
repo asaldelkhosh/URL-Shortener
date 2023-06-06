@@ -19,6 +19,20 @@ class Query(object):
             );
         '''
         
+    def getAllView(self, limit):
+        """return create view query
+
+        Args:
+            limit (int): query param
+
+        Returns:
+            str: view query
+        """
+        return f'''
+            CREATE VIEW urls_get_view AS
+                SELECT * FROM urls ORDER BY count desc LIMIT {limit};
+        '''
+        
     def removeTrigger(self):
         return '''
             CREATE TRIGGER remove_unused_urls BEFORE update 
@@ -55,14 +69,14 @@ class Query(object):
             UPDATE urls SET count = count + 1 WHERE id = {id};
         '''
     
-    def getAll(self, limit):
+    def getAll(self):
         """get top 3 urls query
 
         Returns:
             str: get all query
         """
         return f'''
-            SELECT * FROM urls ORDER BY count desc LIMIT {limit};
+            SELECT * FROM urls_get_view;
         '''
     
     def getURL(self, url):

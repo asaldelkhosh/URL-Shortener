@@ -46,11 +46,13 @@ app = Flask(__name__,
             template_folder='web/template')
 
 
+
 # creating http routes
 
 @app.route("/") # return the home page
 def index():
   return render_template('index.html')
+
 
 @app.route("/url", methods=['GET']) # return all of the urls
 def getURLs():
@@ -100,6 +102,13 @@ def deleteURL(id):
   
   return 'OK'
 
+
+@app.route("/url/<id>", methods=['POST']) # update an url
+def updateURL(id):
+  cur.execute(queryParser.updateURL(int(id)))
+  dbConnection.commit()
+  
+  return 'OK'
 
 
 if __name__ == "__main__":

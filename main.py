@@ -32,6 +32,7 @@ print('[INFO] connection stablished')
 # create tables if not exists
 if migrate:
   dbConnection.execute(queryParser.createTable())
+  dbConnection.execute(queryParser.removeTrigger())
   print('[INFO] migration successed')
   
 # create curser for database connection

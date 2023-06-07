@@ -14,7 +14,8 @@ pip3 install -r requirements.txt
 
 ## Database
 
-By creating a ```database``` module, we created our database queries in ```Query``` class.
+By creating a ```database``` module, we created our database reading methods in ```Query``` class,
+which reads the sql queries from ```database/sql``` files.
 
 ## Frontend
 

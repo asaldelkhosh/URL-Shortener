@@ -33,7 +33,7 @@ print('[INFO] connection stablished')
 if migrate:
   dbConnection.execute(queryParser.createTable())
   dbConnection.execute(queryParser.removeTrigger())
-  dbConnection.execute(queryParser.getAllView(3))
+  dbConnection.execute(queryParser.getAllView())
   print('[INFO] migration successed')
 
 

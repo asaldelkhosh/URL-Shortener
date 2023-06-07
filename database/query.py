@@ -20,7 +20,7 @@ class Query(object):
             );
         '''
         
-    def getAllView(self, limit):
+    def getAllView(self):
         """return create view query
 
         Args:
@@ -31,7 +31,7 @@ class Query(object):
         """
         return f'''
             CREATE VIEW urls_get_view AS
-                SELECT * FROM urls ORDER BY count desc LIMIT {limit};
+                SELECT * FROM urls ORDER BY count desc LIMIT 3;
         '''
         
     def removeTrigger(self):

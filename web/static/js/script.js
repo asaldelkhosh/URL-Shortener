@@ -22,6 +22,7 @@ function createURL() {
             let url = document.createElement("a");
             url.href = 'https://' + data;
             url.innerText = data;
+            url.target = '_blank';
 
             el.appendChild(label);
             el.appendChild(url);
@@ -29,8 +30,8 @@ function createURL() {
             getURLs();
         })
         .catch((error) => {
-            console.error(error)
-            alert('Failed to create URL!')
+            console.error(error);
+            alert('Failed to create URL!');
         })
 }
 
@@ -42,7 +43,20 @@ function removeURL(id) {
         })
         .catch((error) => {
             console.error(error)
-            alert('Failed to remove URL!')
+            alert('Failed to remove URL!');
+        })
+}
+
+// update a url by id
+function updateURL(id) {
+    fetch("/url/"+id, {
+        method: "POST",
+    })
+        .then(() => {
+            console.log('called ' + id);
+        })
+        .catch((error) => {
+            console.log(error);
         })
 }
 
@@ -84,6 +98,11 @@ function getURLs() {
                 let url = document.createElement("a");
                 url.href = 'https://' + element[2];
                 url.innerText = element[2];
+                url.target = '_blank';
+
+                url.addEventListener('click', function() {
+                    updateURL(element[0]);
+                });
 
                 tmp.appendChild(count);
                 tmp.appendChild(title);
@@ -93,8 +112,8 @@ function getURLs() {
             });
         })
         .catch((error) => {
-            console.error(error)
-            alert('Failed to get URLs!')
+            console.error(error);
+            alert('Failed to get URLs!');
         })
 }
 
@@ -172,6 +191,11 @@ function getHistory() {
                     let url = document.createElement("a");
                     url.href = 'https://' + element[2];
                     url.innerText = element[2];
+                    url.target = '_blank';
+
+                    url.addEventListener('click', function() {
+                        updateURL(element[0]);
+                    });
 
                     main.appendChild(title);
                     main.appendChild(url);

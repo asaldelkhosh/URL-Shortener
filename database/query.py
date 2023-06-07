@@ -9,16 +9,8 @@ class Query(object):
         Returns:
             str: create table query
         """
-        return '''
-            CREATE TABLE urls (
-                id         INTEGER PRIMARY KEY AUTOINCREMENT,
-                url        VARCHAR(1024) NOT NULL,
-                short      VARCHAR(1024) NOT NULL,
-                count      INTEGER,
-                created_at TEXT,
-                updated_at TEXT
-            );
-        '''
+        with open('database/sql/createTable.sql', 'r') as file:
+            return file.read()
         
     def getAllView(self):
         """return create view query
@@ -29,10 +21,8 @@ class Query(object):
         Returns:
             str: view query
         """
-        return f'''
-            CREATE VIEW urls_get_view AS
-                SELECT * FROM urls ORDER BY count desc LIMIT 3;
-        '''
+        with open('database/sql/urlsView.sql', 'r') as file:
+            return file.read()
         
     def removeTrigger(self):
         """trigger for removing unused urls
@@ -40,13 +30,8 @@ class Query(object):
         Returns:
             str: trigger creation query
         """
-        return '''
-            CREATE TRIGGER remove_unused_urls BEFORE update 
-            ON urls
-            BEGIN
-                DELETE FROM urls WHERE datetime(updated_at) < datetime('now', '-7 day');
-            END;
-        '''
+        with open('database/sql/urlsTrigger.sql', 'r') as file:
+            return file.read()
     
     def createURL(self, url, short):
         """create a new url query
@@ -81,9 +66,8 @@ class Query(object):
         Returns:
             str: get all query
         """
-        return '''
-            SELECT * FROM urls ORDER BY created_at desc;
-        '''
+        with open('database/sql/getAll.sql', 'r') as file:
+            return file.read()
     
     def getAll(self):
         """get top 3 urls query
@@ -91,9 +75,8 @@ class Query(object):
         Returns:
             str: get all query
         """
-        return f'''
-            SELECT * FROM urls_get_view;
-        '''
+        with open('database/sql/getTop3.sql', 'r') as file:
+            return file.read()
     
     def getURL(self, url):
         """get an specific url

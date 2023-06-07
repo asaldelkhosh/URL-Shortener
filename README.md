@@ -11,3 +11,16 @@ Install project requirements.
 ```shell
 pip3 install -r requirements.txt
 ```
+
+## Database
+
+By creating a ```database``` module, we created our database queries in ```Query``` class.
+
+## Frontend
+
+Using javascript ```fetch``` to make ```http``` calls to our backend system.
+
+## Backend
+
+We created a simple ```rest-api``` with ```Flask``` framework in python and using ```MVC```
+architecture.

@@ -17,6 +17,7 @@ API_TOKEN = "1873:b0zc8c1x9m0ococ8ggsowck4ggco08s"
 migrate = False # migrate is used in order to create tables
 queryParser = Query() # query parser is used to generate sql queries
 
+
 # create database file
 if not os.path.exists(DATABASE_FILE):
   f = open(DATABASE_FILE, "a")

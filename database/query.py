@@ -35,6 +35,11 @@ class Query(object):
         '''
         
     def removeTrigger(self):
+        """trigger for removing unused urls
+
+        Returns:
+            str: trigger creation query
+        """
         return '''
             CREATE TRIGGER remove_unused_urls BEFORE update 
             ON urls

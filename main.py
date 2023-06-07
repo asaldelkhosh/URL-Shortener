@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request
 import requests
 import json
+from datetime import datetime
 
 from database.query import Query
 
@@ -101,7 +102,7 @@ def createURL():
   # get request content
   content = request.get_json(silent=True)
   
-  cur.execute(queryParser.getURL(content['url']))
+  cur.execute(queryParser.getURL(), [content['url']])
   
   # if data already exists
   data = cur.fetchone()
@@ -128,8 +129,10 @@ def createURL():
   res = requests.post(API_HOST, data=json.dumps(data), headers=headers)
   resJSON = res.json()
   
+  time = datetime.now()
+  
   # save it into database
-  cur.execute(queryParser.createURL(content['url'], resJSON['doc']['url']))
+  cur.execute(queryParser.createURL(), [content['url'], resJSON['doc']['url'], 1, time, time])
   dbConnection.commit()
   
   cur.close()
@@ -143,7 +146,7 @@ def deleteURL(id):
   cur = dbConnection.cursor()
   
   # remove url by id
-  cur.execute(queryParser.removeURL(int(id)))
+  cur.execute(queryParser.removeURL(), [int(id)])
   dbConnection.commit()
   
   cur.close()
@@ -156,7 +159,7 @@ def updateURL(id):
   # create curser for database connection
   cur = dbConnection.cursor()
   
-  cur.execute(queryParser.updateURL(int(id)))
+  cur.execute(queryParser.updateURL(), [datetime.now(), int(id)])
   dbConnection.commit()
   
   cur.close()

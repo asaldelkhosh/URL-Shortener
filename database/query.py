@@ -1,7 +1,3 @@
-import datetime
-
-
-
 class Query(object):
     def createTable(self):
         """create the base table
@@ -43,11 +39,10 @@ class Query(object):
         Returns:
             str: insert query
         """
-        return f'''
-            INSERT INTO urls (url, short, count, created_at, updated_at) VALUES ("{url}", "{short}", 1, "{datetime.datetime.now()}", "{datetime.datetime.now()}");
-        '''
+        with open('database/sql/createURL.sql', 'r') as file:
+            return file.read()
         
-    def updateURL(self, id):
+    def updateURL(self):
         """update count value of an url
 
         Args:
@@ -56,9 +51,8 @@ class Query(object):
         Returns:
             str: update url query
         """
-        return f'''
-            UPDATE urls SET count = count + 1 WHERE id = {id};
-        '''
+        with open('database/sql/updateURL.sql', 'r') as file:
+            return file.read()
     
     def getAllByDate(self):
         """get all urls by created day
@@ -78,7 +72,7 @@ class Query(object):
         with open('database/sql/getTop3.sql', 'r') as file:
             return file.read()
     
-    def getURL(self, url):
+    def getURL(self):
         """get an specific url
 
         Args:
@@ -87,11 +81,10 @@ class Query(object):
         Returns:
             str: get url query
         """
-        return f'''
-            SELECT * FROM urls WHERE url = "{url}";
-        '''
+        with open('database/sql/getURL.sql', 'r') as file:
+            return file.read()
     
-    def removeURL(self, id):
+    def removeURL(self):
         """remove a url
 
         Args:
@@ -100,6 +93,5 @@ class Query(object):
         Returns:
             str: remove query
         """
-        return f'''
-            DELETE FROM urls WHERE id = {id};
-        '''
+        with open('database/sql/deleteURL.sql', 'r') as file:
+            return file.read()

@@ -1,1 +1,1 @@
-UPDATE urls SET count = count + 1, update_at = ? WHERE id = ?;
+UPDATE urls SET count = count + 1, updated_at = ? WHERE id = ?;

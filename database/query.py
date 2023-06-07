@@ -5,7 +5,7 @@ class Query(object):
         Returns:
             str: create table query
         """
-        with open('database/sql/createTable.sql', 'r') as file:
+        with open('database/sql/ddl/tables/urls.sql', 'r') as file:
             return file.read()
         
     def getAllView(self):
@@ -17,7 +17,7 @@ class Query(object):
         Returns:
             str: view query
         """
-        with open('database/sql/urlsView.sql', 'r') as file:
+        with open('database/sql/ddl/views/top3.sql', 'r') as file:
             return file.read()
         
     def removeTrigger(self):
@@ -26,7 +26,7 @@ class Query(object):
         Returns:
             str: trigger creation query
         """
-        with open('database/sql/urlsTrigger.sql', 'r') as file:
+        with open('database/sql/ddl/triggers/removeUnusedURLs.sql', 'r') as file:
             return file.read()
     
     def createURL(self, url, short):
@@ -39,7 +39,7 @@ class Query(object):
         Returns:
             str: insert query
         """
-        with open('database/sql/createURL.sql', 'r') as file:
+        with open('database/sql/dml/createURL.sql', 'r') as file:
             return file.read()
         
     def updateURL(self):
@@ -51,7 +51,7 @@ class Query(object):
         Returns:
             str: update url query
         """
-        with open('database/sql/updateURL.sql', 'r') as file:
+        with open('database/sql/dml/updateURL.sql', 'r') as file:
             return file.read()
     
     def getAllByDate(self):
@@ -60,7 +60,7 @@ class Query(object):
         Returns:
             str: get all query
         """
-        with open('database/sql/getAll.sql', 'r') as file:
+        with open('database/sql/dml/getAll.sql', 'r') as file:
             return file.read()
     
     def getAll(self):
@@ -69,7 +69,7 @@ class Query(object):
         Returns:
             str: get all query
         """
-        with open('database/sql/getTop3.sql', 'r') as file:
+        with open('database/sql/dml/getTop3.sql', 'r') as file:
             return file.read()
     
     def getURL(self):
@@ -81,7 +81,7 @@ class Query(object):
         Returns:
             str: get url query
         """
-        with open('database/sql/getURL.sql', 'r') as file:
+        with open('database/sql/dml/getURL.sql', 'r') as file:
             return file.read()
     
     def removeURL(self):
@@ -93,5 +93,5 @@ class Query(object):
         Returns:
             str: remove query
         """
-        with open('database/sql/deleteURL.sql', 'r') as file:
+        with open('database/sql/dml/deleteURL.sql', 'r') as file:
             return file.read()

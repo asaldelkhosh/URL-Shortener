@@ -6,46 +6,56 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- css files --->
         <link rel="stylesheet" type="text/css" href="/css/style.css">
-
         <title>
             URL Shortner
         </title>
     </head>
     <body>
         <div id="app">
-            <div class="header holder">
-                <h1>
-                    Welcome to URL Shortner
-                </h1>
-                <a href="/history">
-                    History
-                </a>
+            <div class="top-layer">
+                <div class="header">
+                    <h1>
+                        Welcome to URL Shortner
+                    </h1>
+                    <a href="/history">
+                        History
+                    </a>
+                </div>
             </div>
-            <div class="holder">
-                With this application you can generate short url for every internet
-                address that you link. Jut enter your url and click on create. You can
-                also view your old urls.<br /><br />
-                Created by Asal Delkhosh
-            </div>
-            <div class="holder">
-                <h3 class="title">
-                    Create a new URL
-                </h3>
-                <label>
-                    Enter URL:
-                </label>
-                <input type="text" id="url-input" />
-                <button class="btn btn-green" onclick="createURL()">
-                    Create
-                </button>
-                <div style="margin-block-start: 25px;;" id="url-result"></div>
-            </div>
-            <div class="holder">
-                <h3 class="title">
-                    List of Top Existing URLs
-                </h3>
-                <ul style="list-style-type: none;" id="urls">
-                </ul>
+            <div class="bottom-layer">
+                <div class="bottom-layer-left">
+                    <h3 class="margin-bottom-20">
+                        List of Top Existing URLs
+                    </h3>
+                    <ul style="list-style-type: none;" id="urls">
+                    </ul>
+                </div>
+                <div class="bottom-layer-right">
+                    <div>
+                        <h3 class="margin-bottom-20">
+                            About project
+                        </h3>
+                        <p>
+                            With this application you can generate short url for every internet
+                            address that you link. Jut enter your url and click on create. You can
+                            also view your old urls.<br /><br />
+                            Created by Asal Delkhosh
+                        </p>
+                    </div>
+                    <div style="margin-block-start: 20px; border-block-start: 1px solid gainsboro; padding-block-start: 20px;">
+                        <h3 class="margin-bottom-20">
+                            Create a new URL
+                        </h3>
+                        <label>
+                            Enter URL:
+                        </label>
+                        <input type="text" id="url-input" />
+                        <button class="btn btn-green" onclick="createURL()">
+                            Create
+                        </button>
+                        <div style="margin-block-start: 25px;;" id="url-result"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- JS files -->

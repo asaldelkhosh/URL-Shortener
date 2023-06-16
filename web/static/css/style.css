@@ -11,17 +11,13 @@
 }
 
 .header {
-    margin-block-end: 60px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.holder {
-    padding: 30px;
-}
-
-.title {
-    margin-block-end: 30px;
+.margin-bottom-20 {
+    margin-block-end: 25px;
 }
 
 .btn {
@@ -47,3 +43,27 @@
 .btn-red:hover {
     background-color: rgb(102, 0, 0);
 } 
+
+.top-layer, .bottom-layer {
+    inline-size: 100%;
+    margin-block-end: 50px;
+
+    padding: 35px;
+    border: 1px solid gainsboro;
+    box-shadow: 0 0 5px #aaaaaa;
+    border-radius: 5px;
+}
+
+.bottom-layer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.bottom-layer-left {
+    padding-inline-end: 21px;
+}
+
+.bottom-layer-right {
+    padding-inline-start: 20px;
+    border-inline-start: 1px solid gainsboro;
+}

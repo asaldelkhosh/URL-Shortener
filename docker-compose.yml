@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  url-shortner:
+    container_name: url-shortner-container
+    build:
+      context: .
+      dockerfile: ./build/Dockerfile
+    ports:
+      - "3000:3000"

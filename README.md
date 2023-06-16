@@ -28,3 +28,11 @@ Using javascript ```fetch``` to make ```http``` calls to our backend system.
 
 We created a simple ```rest-api``` with ```Flask``` framework in python and using ```MVC```
 architecture.
+
+## Docker
+
+Use the following command to setup the project with ```Docker```.
+
+```shell
+docker compose up -d
+```

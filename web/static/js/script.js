@@ -86,26 +86,27 @@ function getURLs() {
             data['urls'].forEach(element => {
                 let tmp = document.createElement("li");
                 tmp.style.marginBlockEnd = "20px";
+                tmp.classList.add("list-item");
 
                 let count = document.createElement("span");
                 count.style.marginInlineEnd = "25px";
                 count.innerText = "Count: " + zeroPad(element[3]);
 
                 let title = document.createElement("span");
-                title.innerHTML = element[1] + " :";
+                title.innerHTML = "URL: " + element[1];
                 title.style.marginInlineEnd = "40px";
 
                 let url = document.createElement("a");
                 url.href = 'https://' + element[2];
-                url.innerText = element[2];
+                url.innerText = "Link: " + element[2];
                 url.target = '_blank';
 
                 url.addEventListener('click', function() {
                     updateURL(element[0]);
                 });
 
-                tmp.appendChild(count);
                 tmp.appendChild(title);
+                tmp.appendChild(count);
                 tmp.appendChild(url);
 
                 rsp.appendChild(tmp);

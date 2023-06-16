@@ -1,8 +1,9 @@
 import sqlite3
 import os
-from flask import Flask, render_template, request
 import requests
 import json
+
+from flask import Flask, render_template, request
 from datetime import datetime
 
 from database.query import Query
@@ -11,8 +12,8 @@ from database.query import Query
 
 # address to sql file
 DATABASE_FILE = "./database/sql.db"
-API_HOST = "https://yun.ir/api/v1/urls"
-API_TOKEN = "1873:b0zc8c1x9m0ococ8ggsowck4ggco08s"
+API_HOST = os.getenv("API_HOST")
+API_TOKEN = os.getenv("API_TOKEN")
 
 
 migrate = False # migrate is used in order to create tables
